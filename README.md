@@ -25,6 +25,10 @@ How we can render list of movies from backend to UI using `map` function.
 Learned to create multiple pages and how to navigate one page from another page using `react-router-dom`.
 - Like if I am hovering on login, it should redirect to login page
 
+### How to handle form in react
+Learned how to use handleChange and handleSubmit while filling login form 
+
+
 ### Application Entry Point
 Inside `index.js` we are rendering whole app.
 
