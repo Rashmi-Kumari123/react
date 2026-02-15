@@ -1,3 +1,9 @@
+import {
+  FETCH_PRODUCTS_FAILURE,
+  FETCH_PRODUCTS_REQUEST,
+  FETCH_PRODUCTS_SUCESS,
+} from "./action";
+
 const initialState = {
   totalProducts: 0,
   products: [],
@@ -6,22 +12,24 @@ const initialState = {
 };
 
 export const productReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "FETCH_PRODUCTS_SUCCESS":
-      return {
-        ...state,
-        products: action.payload,
-        totalProducts: action.payload.length,
-        loading: false,
-        error: null,
-      };
-    case "FETCH_PRODUCTS_FAILURE":
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-    default:
-      return state;
+  if (action.type === FETCH_PRODUCTS_REQUEST) {
+    return {
+      ...state,
+      loading: true,
+      error: null,
+    };
+  } else if (action.type === FETCH_PRODUCTS_SUCESS) {
+    return {
+      ...state,
+      loading: false,
+      products: action.products,
+    };
+  } else if (action.type === FETCH_PRODUCTS_FAILURE) {
+    return {
+      ...state,
+      loading: false,
+      error: action.error,
+    };
   }
+  return state;
 };

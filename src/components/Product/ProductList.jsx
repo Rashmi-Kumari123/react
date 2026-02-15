@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
 import ProductCard from './ProductCard'
-
-const api = "https://fakestoreapi.com/products"
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProducts } from '../../Redux/product/action'
 
 const ProductList = () => {
-    const [products, setProducts] = useState([]);
-    
-    const fetchProducts = async () => {
-        try {
-            const response = await axios.get(api);
-            setProducts(response.data)  
-        } catch (error) {
-            console.log("fetch error", error)
-        }
-    }
-    
+    const store = useSelector((store) => store);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        fetchProducts();
-    }, [])
-    
-    console.log("products outside", products)
+        dispatch(fetchProducts());
+    }, [dispatch])
 
     return (
-        <div className='flex flex-wrap gap-5'>
-            {products.map((item, index) => (
-                <ProductCard key={index} product={item} />
-            ))}
-        </div>
+        <>
+            {store.product.loading ? (
+                <div className="h-screen flex flex-col justify-center">
+                    <h1 className="font-bold text-5xl text-center">loading...</h1>
+                </div>
+            ) : (
+                <div className="flex flex-wrap gap-5">
+                    {store.product.products.map((item) => (
+                        <ProductCard key={item.id} product={item} />
+                    ))}
+                </div>
+            )}
+        </>
     )
 }
 
