@@ -12,7 +12,7 @@ const MovieCard = ({ title, image }) => {
   }
   useEffect(()=>{
       console.log("booking count get updated")
-    }, [bookingCount])
+    }, [bookingCount]) 
   return (
     <div className='border p-5 space-y-5'>
       <img className="w-96 rounded-md" src={image} alt='Movie poster' />
