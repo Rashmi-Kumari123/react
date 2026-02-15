@@ -11,7 +11,7 @@ export const MovieList = ({title}) => {
         <div>
             <h1 className='text-3xl font-semibold text-red-500 pb-5'> {title}</h1>
             <div className='gap-5 flex flex-wrap justify-center'>
-                {movies.map((item, index)=> <MovieCard key = {index} 
+                {movies.map((item, index)=> <MovieCard key = {index}  // index is from 0 to array's length i.e here movie arrays
                 title = {item.title}
                 image = {item.image}
                 />)}
